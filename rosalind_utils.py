@@ -36,3 +36,15 @@ def calc_point_mutations(seq1, seq2):
 			mutations += 1
 		i+=1
 	return mutations
+
+def compute_mrna(protein):
+	''' Computes the total number of possible mRNA sequences from which a given protein string could be translated, modulo 1,000,000. '''
+
+	# The number of codons corresponding to each amino acid:
+	a_dict = {'F': 2, 'L': 6, 'S': 6, 'Stop': 3, 'Y': 2, 'C': 2, 'W': 1, 'P': 4, 'H': 2, 'Q': 2, 'R': 6, 'I': 3, 'M': 1, 'T': 4, 'N': 2, 'K': 2, 'V': 4, 'A': 4, 'D': 2, 'E': 2, 'G': 4}
+	
+	prod = 3 # 3 'STOP' sequences.
+	for a in protein:
+		prod = (prod * a_dict) % 1000000
+
+	return prod
